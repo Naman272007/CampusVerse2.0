@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campus Verse</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;background:#083c4b;color:#fff}
+header{position:absolute;top:0;left:0;width:100%;height:90px;display:flex;align-items:center;justify-content:space-between;padding:0 4.5%;z-index:10;background:rgba(0,20,30,.55)}
+.logo{font-size:29px;font-weight:bold;letter-spacing:1px}
+nav{display:flex;gap:75px;margin-left:100px}
+nav a{color:#fff;text-decoration:none;font-size:14px;font-weight:bold;transition:.3s}
+nav a:hover{color:#4fc3dc}
+.social{display:flex;align-items:center;gap:5px}
+.social-box{width:31px;height:31px;border:2px solid white;display:flex;justify-content:center;align-items:center;font-size:14px}
+.phone{border:2px solid white;padding:7px 12px;font-size:13px}
+.hero{height:570px;position:relative;background:linear-gradient(rgba(0,28,42,.35),rgba(0,35,50,.78)),url("https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=2000&q=80");background-size:cover;background-position:center;display:flex;justify-content:center;align-items:center;text-align:center}
+.hero-content{margin-top:35px}
+.tagline{font-size:16px;font-weight:bold;letter-spacing:1px;margin-bottom:30px}
+.main-title{font-size:clamp(45px,6vw,72px);font-weight:300;letter-spacing:2px;line-height:1}
+.main-title span{font-weight:800}
+.subtitle{font-size:16px;margin-top:8px;font-weight:bold}
+.learn-btn{display:inline-block;margin-top:25px;padding:11px 25px;border:2px solid white;color:white;text-decoration:none;font-size:13px;font-weight:bold;transition:.3s}
+.learn-btn:hover{background:white;color:#073d4c}
+.arrow{margin:12px auto 0;width:15px;height:15px;border-right:3px solid white;border-bottom:3px solid white;transform:rotate(45deg)}
+main{background:linear-gradient(rgba(5,57,71,.95),rgba(5,57,71,.98));padding-bottom:50px}
+.cards{max-width:850px;margin:-15px auto 70px;display:flex;flex-wrap:wrap;justify-content:center;gap:0}
+.hex{width:235px;height:270px;margin:5px;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);position:relative;display:flex;justify-content:center;align-items:center;text-align:center;background-size:cover;background-position:center;overflow:hidden}
+.hex::before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(0,20,30,.25),rgba(0,20,30,.82))}
+.hex-content{position:relative;z-index:2}
+.hex h2{font-size:17px;margin-bottom:18px}
+.hex .learn-btn{font-size:11px;padding:7px 12px;margin:0}
+.my-profile{background-image:url("https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=700&q=80")}
+.services{background-image:url("https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=700&q=80")}
+.campus-map{background-image:url("https://images.unsplash.com/photo-1524666041070-9cff998a33b9?auto=format&fit=crop&w=700&q=80")}
+.student-id{background-image:url("https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=700&q=80")}
+.events{background-image:url("https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=700&q=80")}
+.description{max-width:710px;margin:0 auto;padding:28px 20px;border-top:2px solid rgba(255,255,255,.5);border-bottom:2px solid rgba(255,255,255,.5);text-align:center}
+.description p{font-size:13px;line-height:1.7;color:#e4eef1}
+footer{max-width:760px;margin:0 auto;padding:40px 0 15px}
+.footer-columns{display:grid;grid-template-columns:repeat(4,1fr);gap:40px}
+.footer-column h3{font-size:12px;margin-bottom:25px}
+.footer-column a{display:block;color:#d5e3e7;font-size:10px;margin-bottom:10px;text-decoration:underline}
+.footer-column a:hover{color:#4fc3dc}
+.footer-social{display:flex;gap:5px;margin:15px 0}
+.footer-social div{width:23px;height:23px;border:1px solid white;display:flex;align-items:center;justify-content:center;font-size:10px}
+.address{font-size:10px;line-height:1.6}
+.copyright{border-top:1px solid rgba(255,255,255,.35);margin-top:25px;padding-top:22px;text-align:center;font-size:10px;color:#d4e0e4}
+@media(max-width:800px){
+header{height:auto;padding:20px;flex-wrap:wrap;gap:20px}
+nav{order:3;width:100%;justify-content:center;margin:0;gap:30px}
+.social{margin-left:auto}
+.hero{height:620px}
+.tagline{font-size:13px;padding:0 20px}
+.main-title{font-size:45px}
+.cards{padding:0 15px;margin-top:20px}
+.hex{width:210px;height:240px}
+.footer-columns{grid-template-columns:repeat(2,1fr);padding:0 25px}
+}
+@media(max-width:500px){
+.logo{font-size:23px}.phone{display:none}nav{gap:18px}nav a{font-size:11px}
+.hero{height:560px}.main-title{font-size:39px}.subtitle{font-size:13px}
+.cards{flex-direction:column;align-items:center}
+.hex{width:250px;height:280px;margin:-8px 0}
+.footer-columns{grid-template-columns:1fr;text-align:center}
+.footer-social{justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">[CV]</div>
+  <nav>
+    <a href="#about">ABOUT US</a>
+    <a href="#services">SERVICES</a>
+    <a href="#discover">PROJECTS</a>
+  </nav>
+  <div class="social">
+    <div class="social-box">f</div>
+    <div class="social-box">in</div>
+    <div class="social-box">▶</div>
+    <div class="phone">(1 866) 555-5555</div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="tagline">WHEN CAMPUS INFORMATION MATTERS, TRUST CAMPUS VERSE</div>
+    <h1 class="main-title"><span>CAMPUS VERSE</span></h1>
+    <div class="subtitle">CAMPUS INFORMATION &amp; EXPERIENCE</div>
+    <a href="#cards" class="learn-btn">LEARN MORE</a>
+    <div class="arrow"></div>
+  </div>
+</section>
+
+<main>
+  <section class="cards" id="cards">
+
+    <div class="hex my-profile">
+      <div class="hex-content">
+        <h2>MY PROFILE</h2>
+        <a href="#" class="learn-btn">LEARN MORE</a>
+      </div>
+    </div>
+
+    <div class="hex services">
+      <div class="hex-content">
+        <h2>CLUBS &amp; SERVICES</h2>
+        <a href="#" class="learn-btn">LEARN MORE</a>
+      </div>
+    </div>
+
+    <div class="hex campus-map">
+      <div class="hex-content">
+        <h2>CAMPUS MAP</h2>
+        <a href="#" class="learn-btn">LEARN MORE</a>
+      </div>
+    </div>
+
+    <div class="hex student-id">
+      <div class="hex-content">
+        <h2>STUDENT ID</h2>
+        <a href="#" class="learn-btn">LEARN MORE</a>
+      </div>
+    </div>
+
+    <div class="hex events">
+      <div class="hex-content">
+        <h2>NEWS &amp; EVENTS</h2>
+        <a href="#" class="learn-btn">LEARN MORE</a>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="description" id="about">
+    <p>
+      CAMPUS VERSE provides students with a unified digital experience
+      for discovering academics, campus facilities, clubs, events,
+      student activities and important campus information. Explore your
+      campus and stay connected with everything happening around you.
+    </p>
+  </section>
+
+  <footer>
+    <div class="footer-columns">
+
+      <div class="footer-column">
+        <h3>ABOUT US</h3>
+        <a href="#">About Campus Verse</a>
+        <a href="#">Our Campus</a>
+        <a href="#">Student Community</a>
+        <a href="#">Campus Facilities</a>
+        <a href="#">Contact Us</a>
+      </div>
+
+      <div class="footer-column" id="services">
+        <h3>SERVICES</h3>
+        <a href="#">Campus Map</a>
+        <a href="#">Academic Information</a>
+        <a href="#">Club Directory</a>
+        <a href="#">Student Services</a>
+        <a href="#">Campus Navigation</a>
+      </div>
+
+      <div class="footer-column" id="discover">
+        <h3>DISCOVER</h3>
+        <a href="#">Departments</a>
+        <a href="#">Hostels</a>
+        <a href="#">Sports</a>
+        <a href="#">Events</a>
+        <a href="#">Student Activities</a>
+      </div>
+
+      <div class="footer-column">
+        <h3>CONTACT US</h3>
+        <a href="#">General Inquiry</a>
+        <a href="#">Request Information</a>
+        <a href="#">Support</a>
+        <div class="footer-social">
+          <div>f</div><div>in</div><div>▶</div>
+        </div>
+        <div class="address">
+          Campus Verse<br>
+          University Campus<br>
+          India
+        </div>
+      </div>
+
+    </div>
+
+    <div class="copyright">
+      © 2026 Campus Verse. All Rights Reserved.
+      • Terms of Use • Privacy Policy
+    </div>
+  </footer>
+</main>
+
+</body>
+</html>

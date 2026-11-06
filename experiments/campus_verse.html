@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Campus Verse</title>
+  <style>
+    :root {
+      --navy: #061c28;
+      --teal: #073b49;
+      --cyan: #36d8ee;
+      --white: #f5f8fa;
+      --muted: #b9cbd2;
+      --line: rgba(220, 245, 250, .55);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--white);
+      font-family: Arial, Helvetica, sans-serif;
+      background: #073642;
+    }
+
+    .topbar {
+      height: 72px;
+      padding: 0 clamp(18px, 4.5vw, 54px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      background: rgba(3, 19, 28, .97);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      position: relative;
+      z-index: 5;
+    }
+    .logo {
+      font-size: 25px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      color: #fff;
+      white-space: nowrap;
+    }
+    .logo span { color: var(--cyan); }
+    nav { display: flex; align-items: center; gap: clamp(22px, 6vw, 78px); }
+    nav a, .top-actions a {
+      color: #f1f5f6;
+      text-decoration: none;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .3px;
+    }
+    nav a:hover, .top-actions a:hover { color: var(--cyan); }
+    .top-actions { display: flex; align-items: center; gap: 5px; }
+    .social {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 23px;
+      height: 22px;
+      border: 1px solid #d7e5e9;
+      font-size: 12px !important;
+      font-weight: bold;
+    }
+    .phone {
+      border: 1px solid #d7e5e9;
+      padding: 5px 8px;
+      white-space: nowrap;
+      font-size: 11px !important;
+    }
+
+    .hero {
+      min-height: 350px;
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      text-align: center;
+      padding: 42px 18px 100px;
+      background:
+        linear-gradient(180deg, rgba(4,30,42,.70) 0%, rgba(3,43,56,.40) 50%, #073642 100%),
+        radial-gradient(ellipse at 50% 74%, rgba(20,164,194,.32), transparent 48%),
+        linear-gradient(120deg, #102c3d, #0b4c60 50%, #092638);
+    }
+    /* Decorative skyline built from CSS so no external image is required. */
+    .skyline {
+      position: absolute;
+      z-index: -1;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 54%;
+      opacity: .78;
+      background:
+        linear-gradient(180deg, transparent 0 12%, rgba(37,206,233,.10) 12.5% 13%, transparent 13.5%),
+        repeating-linear-gradient(90deg, transparent 0 3.5%, rgba(39,190,222,.10) 3.6% 3.8%, transparent 3.9% 7%),
+        linear-gradient(0deg, #061f2b 0 18%, transparent 18%);
+      clip-path: polygon(0 48%, 4% 48%, 4% 33%, 8% 33%, 8% 60%, 12% 60%, 12% 25%, 15% 25%, 15% 48%, 20% 48%, 20% 12%, 24% 12%, 24% 52%, 28% 52%, 28% 31%, 32% 31%, 32% 62%, 37% 62%, 37% 18%, 41% 18%, 41% 45%, 45% 45%, 45% 5%, 50% 5%, 50% 60%, 54% 60%, 54% 25%, 59% 25%, 59% 49%, 64% 49%, 64% 12%, 69% 12%, 69% 55%, 73% 55%, 73% 28%, 78% 28%, 78% 58%, 83% 58%, 83% 17%, 87% 17%, 87% 48%, 92% 48%, 92% 35%, 96% 35%, 96% 55%, 100% 55%, 100% 100%, 0 100%);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      inset: auto -5% 0;
+      height: 34%;
+      background: repeating-linear-gradient(168deg, transparent 0 17px, rgba(26,211,239,.18) 18px 19px, transparent 20px 42px);
+      transform: perspective(220px) rotateX(22deg);
+      transform-origin: bottom;
+      opacity: .5;
+    }
+    .hero-content { max-width: 760px; }
+    .eyebrow {
+      margin: 0 0 22px;
+      color: #d4e2e6;
+      font-size: 13px;
+      letter-spacing: .45px;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(35px, 6vw, 48px);
+      font-weight: 300;
+      letter-spacing: 3px;
+      line-height: 1.08;
+      text-transform: uppercase;
+    }
+    h1 strong { font-weight: 700; letter-spacing: 1px; }
+    .hero-sub {
+      margin: 2px 0 14px;
+      font-size: 12px;
+      letter-spacing: .7px;
+      text-transform: uppercase;
+    }
+    .outline-btn {
+      display: inline-block;
+      border: 1px solid #eaf7fa;
+      color: #fff;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-size: 11px;
+      font-weight: bold;
+      padding: 9px 20px;
+      box-shadow: 0 0 0 4px rgba(255,255,255,.06);
+      transition: background .2s, color .2s;
+    }
+    .outline-btn:hover { background: #eaf7fa; color: #062b38; }
+    .down {
+      display: block;
+      width: 10px;
+      height: 10px;
+      margin: 12px auto 0;
+      border-right: 2px solid white;
+      border-bottom: 2px solid white;
+      transform: rotate(45deg);
+    }
+
+    .dashboard {
+      padding: 0 18px 58px;
+      margin-top: -18px;
+      position: relative;
+      z-index: 2;
+      background: linear-gradient(180deg, transparent, #073642 8%);
+    }
+    .cards {
+      width: min(690px, 100%);
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0 10px;
+    }
+    .feature {
+      position: relative;
+      width: 166px;
+      height: 190px;
+      margin: 0 0 -1px;
+      padding: 0;
+      color: white;
+      text-decoration: none;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      isolation: isolate;
+      clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+      background: rgba(3, 22, 32, .68);
+      transition: transform .2s, filter .2s;
+    }
+    .feature:hover { filter: brightness(1.2); transform: translateY(-4px); }
+    .feature::before {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      z-index: -1;
+      clip-path: inherit;
+      background:
+        linear-gradient(180deg, rgba(4,30,41,.12), rgba(2,25,35,.95) 70%),
+        var(--card-art, linear-gradient(135deg, #426778, #152e3b));
+    }
+    .feature::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background: rgba(207,244,250,.8);
+    }
+    .feature .symbol {
+      font-size: 31px;
+      line-height: 1;
+      margin-bottom: 14px;
+      color: #c8f6ff;
+      text-shadow: 0 0 14px rgba(41,220,244,.45);
+    }
+    .feature h2 {
+      margin: 0 0 12px;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .3px;
+    }
+    .feature .small-btn {
+      display: inline-block;
+      border: 1px solid rgba(255,255,255,.85);
+      padding: 5px 9px;
+      font-size: 8px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: .2px;
+    }
+    .map-art { --card-art: linear-gradient(145deg, #829da7 0%, #284c5a 43%, #102d3b 44%, #102d3b 100%); }
+    .id-art { --card-art: linear-gradient(145deg, #91a8b0 0%, #3a6674 45%, #153d4b 46%, #0b2937 100%); }
+    .profile-art { --card-art: linear-gradient(145deg, #aabac0 0%, #536d79 45%, #183947 46%, #0b2937 100%); }
+    .study-art { --card-art: linear-gradient(145deg, #637d90 0%, #2c4c5c 44%, #102c3a 45%, #071f2c 100%); }
+    .news-art { --card-art: linear-gradient(145deg, #a0b6bf 0%, #486775 44%, #153845 45%, #082531 100%); }
+
+    .notice {
+      max-width: 690px;
+      margin: 0 auto;
+      text-align: center;
+      color: #d2e0e4;
+      font-size: 12px;
+      line-height: 1.6;
+      padding: 18px 22px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 650px) {
+      .topbar { height: auto; min-height: 66px; flex-wrap: wrap; padding: 14px 18px; }
+      nav { order: 3; width: 100%; justify-content: space-between; gap: 12px; }
+      nav a { font-size: 10px; }
+      .top-actions .phone { display: none; }
+      .hero { min-height: 330px; padding-top: 48px; }
+      .eyebrow { font-size: 11px; }
+      .cards { max-width: 365px; gap: 0 4px; }
+      .feature { width: min(45vw, 160px); height: 178px; }
+      .dashboard { padding-bottom: 38px; }
+    }
+    @media (max-width: 360px) {
+      .feature { width: 145px; height: 165px; }
+      .feature h2 { font-size: 11px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar" id="top">
+    <a class="logo" href="#top" aria-label="Campus Verse home">[<span>CV</span>]</a>
+    <nav aria-label="Main navigation">
+      <a href="#about">About Us</a>
+      <a href="#campus-tools">Campus</a>
+      <a href="#campus-tools">Explore</a>
+    </nav>
+    <div class="top-actions" aria-label="Social links">
+      <a class="social" href="#" aria-label="Facebook">f</a>
+      <a class="social" href="#" aria-label="Instagram">◎</a>
+      <a class="social" href="#" aria-label="Video channel">▶</a>
+      <a class="phone" href="mailto:hello@campusverse.edu">CONTACT US</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="about">
+      <div class="skyline" aria-hidden="true"></div>
+      <div class="hero-content">
+        <p class="eyebrow">Your campus, connected. Your journey, simplified.</p>
+        <h1>Campus <strong>Verse</strong></h1>
+        <p class="hero-sub">Your digital campus hub</p>
+        <a class="outline-btn" href="#campus-tools">Explore Campus</a>
+        <span class="down" aria-hidden="true"></span>
+      </div>
+    </section>
+
+    <section class="dashboard" id="campus-tools" aria-label="Campus tools">
+      <div class="cards">
+        <a class="feature map-art" href="#campus-map">
+          <span class="symbol" aria-hidden="true">⌖</span>
+          <h2>Campus Map</h2>
+          <span class="small-btn">Open Map</span>
+        </a>
+        <a class="feature id-art" href="#student-id">
+          <span class="symbol" aria-hidden="true">▤</span>
+          <h2>Student ID</h2>
+          <span class="small-btn">View ID</span>
+        </a>
+        <a class="feature profile-art" href="#my-profile">
+          <span class="symbol" aria-hidden="true">♙</span>
+          <h2>My Profile</h2>
+          <span class="small-btn">View Profile</span>
+        </a>
+        <a class="feature study-art" href="#case-studies">
+          <span class="symbol" aria-hidden="true">▣</span>
+          <h2>Case Studies</h2>
+          <span class="small-btn">Learn More</span>
+        </a>
+        <a class="feature news-art" href="#news-events">
+          <span class="symbol" aria-hidden="true">▧</span>
+          <h2>News &amp; Events</h2>
+          <span class="small-btn">See Updates</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- The original lower corporate information/footer section has been removed. -->
+  </main>
+</body>
+</html>

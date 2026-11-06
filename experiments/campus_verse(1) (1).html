@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Campus Verse</title>
+<style>
+  :root {
+    /* Replace campus-background.jpg with your campus aerial image. */
+    --campus-bg: url("campus-background.jpg");
+    --cyan: #13bde9;
+    --white: #f7fbff;
+    --line: rgba(225, 241, 255, .48);
+  }
+
+  * { box-sizing: border-box; }
+  html { min-height: 100%; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    color: var(--white);
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #052d3d;
+  }
+
+  .page {
+    position: relative;
+    isolation: isolate;
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background:
+      linear-gradient(180deg, rgba(2, 23, 43, .12) 0%, rgba(1, 28, 43, .36) 34%, #032b3b 73%, #032b3b 100%),
+      var(--campus-bg) center 38% / cover no-repeat,
+      linear-gradient(180deg, #0a4366, #032b3b);
+  }
+
+  /* Atmospheric overlay keeps the white title and cards readable. */
+  .page::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: linear-gradient(180deg, transparent 10%, rgba(0, 24, 39, .12) 30%, rgba(0, 31, 47, .72) 61%, #032b3b 83%);
+  }
+
+  .hero {
+    width: min(100%, 1100px);
+    padding: clamp(170px, 27vh, 310px) 24px 0;
+    text-align: center;
+  }
+
+  .hero h1 {
+    margin: 0;
+    font-size: clamp(2.65rem, 8vw, 5.25rem);
+    line-height: 1.04;
+    font-weight: 300;
+    letter-spacing: .045em;
+    text-shadow: 0 3px 18px rgba(0,0,0,.22);
+  }
+  .hero h1 strong { font-weight: 750; }
+
+  .tagline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(16px, 4.5vw, 50px);
+    margin: 22px auto 0;
+    color: var(--cyan);
+    font-size: clamp(.8rem, 2vw, 1.2rem);
+    font-weight: 600;
+    letter-spacing: .48em;
+    text-transform: uppercase;
+  }
+  .tagline::before, .tagline::after {
+    content: "";
+    width: clamp(48px, 8vw, 90px);
+    height: 1px;
+    background: rgba(29, 202, 241, .6);
+  }
+
+  .tiles {
+    width: min(100%, 650px);
+    margin: clamp(250px, 36vh, 390px) auto 0;
+    padding: 0 18px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-items: center;
+    column-gap: clamp(10px, 2vw, 20px);
+    row-gap: 0;
+  }
+
+  .tile {
+    width: min(100%, 214px);
+    aspect-ratio: 1 / 1.08;
+    position: relative;
+    display: grid;
+    place-items: center;
+    text-decoration: none;
+    color: var(--white);
+    margin-bottom: -1px;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    background: var(--line);
+    transition: transform .2s ease, filter .2s ease;
+  }
+  .tile::before {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    clip-path: inherit;
+    background: rgba(4, 43, 62, .77);
+    transition: background .2s ease;
+  }
+  .tile:hover {
+    transform: translateY(-5px);
+    filter: brightness(1.13);
+  }
+  .tile:hover::before { background: rgba(4, 57, 78, .86); }
+
+  .tile-content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 20px 8px;
+  }
+  .tile svg {
+    width: clamp(58px, 8vw, 86px);
+    height: clamp(58px, 8vw, 86px);
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .tile .person-icon { width: clamp(70px, 9vw, 94px); height: clamp(70px, 9vw, 94px); }
+  .tile span {
+    font-size: clamp(.72rem, 1.6vw, .98rem);
+    font-weight: 600;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .tile:nth-child(3), .tile:nth-child(4) {
+    transform: translateY(0);
+  }
+  .tile:nth-child(3):hover, .tile:nth-child(4):hover { transform: translateY(-5px); }
+
+  .contact {
+    width: calc(100% - 76px);
+    max-width: 1200px;
+    margin: 34px auto 0;
+    padding: 34px 0 42px;
+    border-top: 3px dotted rgba(229, 244, 255, .8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+  }
+  .mail-circle {
+    width: 56px;
+    height: 56px;
+    border: 1.5px solid rgba(255,255,255,.85);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+  }
+  .mail-circle svg { width: 33px; height: 33px; stroke: currentColor; fill: none; stroke-width: 1.6; }
+  .contact a {
+    color: var(--white);
+    text-decoration: none;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-weight: 400;
+  }
+  .contact a:hover { color: var(--cyan); }
+
+  @media (max-width: 560px) {
+    .hero { padding-top: 18vh; }
+    .hero h1 { letter-spacing: .015em; }
+    .tagline { letter-spacing: .25em; gap: 12px; }
+    .tiles { margin-top: 25vh; max-width: 440px; padding: 0 12px; }
+    .tile { width: min(100%, 180px); }
+    .tile-content { gap: 10px; }
+    .contact { width: calc(100% - 36px); margin-top: 28px; }
+  }
+
+  @media (max-width: 360px) {
+    .tiles { column-gap: 4px; }
+    .tile span { font-size: .66rem; }
+  }
+</style>
+</head>
+<body>
+<main class="page">
+  <header class="hero">
+    <h1>CAMPUS <strong>VERSE</strong></h1>
+    <div class="tagline">KNOW YOUR COLLEGE</div>
+  </header>
+
+  <nav class="tiles" aria-label="Campus navigation">
+    <a class="tile" href="#student-id" aria-label="Student ID">
+      <span class="tile-content">
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+          <path d="M43 13h14v10H43zM34 23h32v8H34z" />
+          <rect x="8" y="30" width="84" height="57" rx="3"/>
+          <circle cx="30" cy="51" r="8"/>
+          <path d="M18 75v-5c0-7 5-11 12-11s12 4 12 11v5zM54 49h28M54 61h28M54 73h19"/>
+        </svg>
+        <span>STUDENT ID</span>
+      </span>
+    </a>
+
+    <a class="tile" href="#campus-map" aria-label="Campus Map">
+      <span class="tile-content">
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+          <path d="M10 72 30 25l20 7 20-7 20 47-20 6-20-7-20 7z"/>
+          <path d="M30 25 20 77M50 32v39M70 25l10 53M22 48l19 4M57 42l17-4M17 62l19-4M61 59l20 4"/>
+          <path d="M50 7c-10 0-17 8-17 18 0 13 17 30 17 30s17-17 17-30C67 15 60 7 50 7z" fill="currentColor"/>
+          <circle cx="50" cy="25" r="6" fill="#07374d" stroke="none"/>
+        </svg>
+        <span>CAMPUS MAP</span>
+      </span>
+    </a>
+
+    <a class="tile" href="#my-profile" aria-label="My Profile">
+      <span class="tile-content">
+        <svg class="person-icon" viewBox="0 0 100 100" aria-hidden="true">
+          <circle cx="50" cy="50" r="43"/>
+          <circle cx="50" cy="37" r="13" fill="currentColor" stroke="none"/>
+          <path d="M25 76c0-13 10-22 25-22s25 9 25 22v4H25z" fill="currentColor" stroke="none"/>
+        </svg>
+        <span>MY PROFILE</span>
+      </span>
+    </a>
+
+    <a class="tile" href="#feedback" aria-label="Feedback">
+      <span class="tile-content">
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+          <path d="M16 17h55v65H16zM23 11h55v65M30 5h55v65"/>
+          <path d="M30 15c12-4 21 0 27 8 6-8 15-12 27-8v54c-12-4-21 0-27 8-6-8-15-12-27-8z"/>
+          <path d="M57 23v54"/>
+        </svg>
+        <span>FEEDBACK</span>
+      </span>
+    </a>
+  </nav>
+
+  <footer class="contact">
+    <span class="mail-circle" aria-hidden="true">
+      <svg viewBox="0 0 40 40">
+        <rect x="3" y="7" width="34" height="26" rx="1"/>
+        <path d="m4 9 16 13L36 9M4 31l11-11M36 31 25 20"/>
+      </svg>
+    </span>
+    <a href="mailto:contact@campusverse.edu">CONTACT US</a>
+  </footer>
+</main>
+</body>
+</html>
