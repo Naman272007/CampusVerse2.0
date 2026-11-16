@@ -1,0 +1,315 @@
+
+<!doctype html>
+<html lang="en-GB">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#062b43">
+
+  <title>Campus Verse | Voluntary Attendance</title>
+
+  <link rel="stylesheet" href="attendance.css">
+  <script src="attendance.js" defer></script>
+</head>
+
+<body>
+
+  
+<!-- HEADER -->
+<header class="topbar">
+
+    <!-- CAMPUS VERSE HOME LINK -->
+    <a class="brand" href="index.html" aria-label="Go to Campus Verse home">
+        <span>CAMPUS</span><b>VERSE</b>
+    </a>
+
+    <span class="top-tag">KNOW YOUR COLLEGE</span>
+
+    <!-- CLOSE / BACK TO HOME -->
+    <a href="index.html"
+       class="close-btn"
+       aria-label="Back to home"
+       title="Back to Home">
+        &times;
+    </a>
+
+</header>
+
+  <main class="container">
+
+    <!-- YEAR AND BRANCH SELECTION -->
+    <section class="select-panel" aria-label="Academic selection">
+
+      <div class="field">
+        <label for="year">Select your year</label>
+
+        <select id="year">
+          <option value="1">I Year</option>
+          <option value="2">II Year</option>
+          <option value="3">III Year</option>
+          <option value="4">IV Year</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="branch">Select your branch</label>
+
+        <select id="branch">
+          <option value="DSAI">DSAI</option>
+          <option value="CSE">CSE</option>
+          <option value="ECE">ECE</option>
+        </select>
+      </div>
+
+    </section>
+
+    <!-- MAIN HEADING -->
+    <div class="heading">
+
+      <div>
+        <p class="eyebrow">CAMPUS VERSE / ACADEMICS</p>
+
+        <h1>
+          Voluntary <em>Attendance</em>
+        </h1>
+
+        <p class="subtitle">Your classes. Your record.</p>
+      </div>
+
+      <span id="branchBadge" class="branch-badge">
+        I Year · DSAI
+      </span>
+
+    </div>
+
+    <!-- ATTENDANCE TABS -->
+    <div class="tabs" role="tablist" aria-label="Attendance pages">
+
+      <button
+        id="markTab"
+        class="tab active"
+        type="button"
+        role="tab"
+        aria-selected="true"
+        aria-controls="markPanel">
+        Mark Attendance
+      </button>
+
+      <button
+        id="totalTab"
+        class="tab"
+        type="button"
+        role="tab"
+        aria-selected="false"
+        aria-controls="totalPanel">
+        Total Attendance
+      </button>
+
+    </div>
+
+    <!-- MARK ATTENDANCE -->
+    <section
+      id="markPanel"
+      role="tabpanel"
+      aria-labelledby="markTab">
+
+      <!-- DATE SELECTION -->
+      <div class="date-panel card">
+
+        <div class="field">
+
+          <label for="date">Select date</label>
+
+          <div class="date-picker-wrap">
+
+            <span
+              id="dateDisplay"
+              class="date-display"
+              aria-hidden="true">
+              DD/MM/YYYY
+            </span>
+
+            <input
+              type="date"
+              id="date"
+              aria-label="Select attendance date">
+
+          </div>
+
+        </div>
+
+        <span class="date-info" id="dateInfo"></span>
+
+      </div>
+
+      <!-- CANCEL ALL CLASSES -->
+      <div class="cancel-panel card">
+
+        <div>
+          <strong>Cancel All Classes</strong>
+
+          <p>Applies only to the selected date.</p>
+        </div>
+
+        <label class="toggle">
+
+          <input
+            id="cancelAll"
+            type="checkbox"
+            aria-label="Cancel all classes on selected date">
+
+          <span class="toggle-visual"></span>
+
+        </label>
+
+      </div>
+
+
+<!-- PRESENT ALL / ABSENT ALL -->
+<div class="bulk-row">
+
+  <div class="bulk-panel card">
+    <div>
+      <strong>Present All</strong>
+      <p>All applicable classes</p>
+    </div>
+
+    <label class="toggle">
+      <input
+        id="presentAll"
+        type="checkbox"
+        aria-label="Mark all classes Present">
+      <span class="toggle-visual"></span>
+    </label>
+  </div>
+
+  <div class="bulk-panel card">
+    <div>
+      <strong>Absent All</strong>
+      <p>All applicable classes</p>
+    </div>
+
+    <label class="toggle">
+      <input
+        id="absentAll"
+        type="checkbox"
+        aria-label="Mark all classes Absent">
+      <span class="toggle-visual"></span>
+    </label>
+  </div>
+
+</div>
+
+
+      <!-- WEEKDAY NAVIGATION -->
+      <div
+        class="weekday-bar"
+        id="weekdayBar"
+        aria-label="Select a weekday">
+      </div>
+
+      <!-- TIMETABLE HEADING -->
+      <h2 class="schedule-title" id="dayTitle">
+        Friday Timetable
+      </h2>
+
+      <!-- CLASS CARDS -->
+      <div
+        id="classes"
+        class="class-list"
+        aria-live="polite">
+      </div>
+
+    </section>
+
+    <!-- TOTAL ATTENDANCE -->
+    <section
+      id="totalPanel"
+      role="tabpanel"
+      aria-labelledby="totalTab"
+      hidden>
+
+      <div class="overview" id="overview"></div>
+
+      <div class="totals-heading">
+
+        <h2>Course-wise Attendance</h2>
+
+        <p>
+          Each scheduled class block counts as one session.
+        </p>
+
+      </div>
+
+      <div id="totals" class="course-totals"></div>
+
+    </section>
+
+    <!-- LOCAL STORAGE SECTION -->
+    <section
+      class="storage-panel card"
+      aria-labelledby="storageTitle">
+
+      <div>
+
+        <h2 id="storageTitle">Local test data</h2>
+
+        <p>
+          Saved automatically in this browser.
+          Export a backup before clearing browser data.
+        </p>
+
+      </div>
+
+      <div class="storage-actions">
+
+        <button
+          type="button"
+          class="secondary-btn"
+          id="exportBtn">
+          Export JSON
+        </button>
+
+        <button
+          type="button"
+          class="secondary-btn"
+          id="importBtn">
+          Import JSON
+        </button>
+
+        <button
+          type="button"
+          class="danger-btn"
+          id="clearBtn">
+          Reset data
+        </button>
+
+        <input
+          type="file"
+          id="importFile"
+          accept=".json,application/json"
+          hidden>
+
+      </div>
+
+    </section>
+
+    <!-- NOTIFICATION -->
+    <p
+      id="notice"
+      class="notice"
+      role="status"
+      aria-live="polite">
+    </p>
+
+    <!-- FOOTER -->
+    <footer>
+      Campus Verse
+      <span>Voluntary Attendance</span>
+    </footer>
+
+  </main>
+
+</body>
+</html>

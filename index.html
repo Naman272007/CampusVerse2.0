@@ -346,6 +346,116 @@ a.hex .hex-icon {
     color: white;
 }
 
+/* CONTACT BUTTON */
+
+.contact-section {
+    background: transparent;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    color: white;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+/* CONTACT POPUP BACKGROUND */
+
+.contact-popup {
+    display: none;
+
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0, 15, 25, 0.75);
+
+    justify-content: center;
+    align-items: center;
+
+    z-index: 1000;
+}
+
+/* POPUP BOX */
+
+.contact-popup-content {
+    position: relative;
+
+    width: 90%;
+    max-width: 380px;
+
+    padding: 35px 25px;
+
+    background: #00334d;
+
+    border: 1px solid rgba(255,255,255,0.3);
+
+    border-radius: 15px;
+
+    text-align: center;
+
+    box-shadow: 0 10px 35px rgba(0,0,0,0.4);
+}
+
+.contact-popup-content h2 {
+    font-size: 23px;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.contact-popup-content p {
+    color: #b9dce8;
+    margin-bottom: 25px;
+}
+
+/* PHONE NUMBERS */
+
+.phone-contact {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    padding: 15px;
+
+    margin-top: 12px;
+
+    background: rgba(255,255,255,0.08);
+
+    border-radius: 8px;
+}
+
+.phone-contact i {
+    color: #48d9f5;
+    font-size: 18px;
+}
+
+.phone-contact a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.phone-contact a:hover {
+    color: #48d9f5;
+}
+
+/* CLOSE BUTTON */
+
+.close-contact {
+    position: absolute;
+
+    top: 10px;
+    right: 15px;
+
+    background: none;
+    border: none;
+
+    color: white;
+    font-size: 28px;
+
+    cursor: pointer;
+}
+
 
         /* =================================================
            RESPONSIVE DESIGN
@@ -478,21 +588,21 @@ a.hex .hex-icon {
         <section class="hex-container">
 
 
-            <!-- THREADS -->
+            <!-- ATTENDANCE -->
 
-            <div class="hex">
+<a href="attendance.html" class="hex">
 
-                <div class="hex-content">
+    <div class="hex-content">
 
-                    <i class="fa-regular fa-comments hex-icon"></i>
+        <i class="fa-solid fa-clipboard-user hex-icon"></i>
 
-                    <div class="hex-text">
-                        THREADS
-                    </div>
+        <div class="hex-text">
+           SELF-ATTENDANCE
+        </div>
 
-                </div>
+    </div>
 
-            </div>
+</a>
 
 
            
@@ -566,28 +676,112 @@ a.hex .hex-icon {
         </section>
 
 
-        <!-- =================================================
-             CONTACT US
-             ================================================= -->
+       <!-- CONTACT US -->
 
-        <div class="contact-section">
+<button class="contact-section" id="contactUsBtn" type="button">
 
-            <div class="contact-icon">
+    <div class="contact-icon">
+        <i class="fa-regular fa-envelope"></i>
+    </div>
 
-                <i class="fa-regular fa-envelope"></i>
+    <div class="contact-text">
+        CONTACT US
+    </div>
 
-            </div>
+</button>
 
-            <div class="contact-text">
-                CONTACT US
-            </div>
+<!-- CONTACT POPUP -->
+
+<div class="contact-popup" id="contactPopup">
+
+    <div class="contact-popup-content">
+
+        <button class="close-contact" id="closeContact">
+            &times;
+        </button>
+
+        <h2>CONTACT US</h2>
+
+        <p>Get in touch with us</p>
+
+        <div class="phone-contact">
+
+            <i class="fa-solid fa-phone"></i>
+
+            <a href="tel:+919111217107">
+                +91 91112 17107
+            </a>
 
         </div>
+
+        <div class="phone-contact">
+
+            <i class="fa-solid fa-phone"></i>
+
+            <a href="tel:+919174731315">
+                +91 91747 31315
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
 
 
     </main>
 
+<script>
 
+// CONTACT POPUP
+
+const contactBtn = document.getElementById("contactUsBtn");
+
+const contactPopup = document.getElementById("contactPopup");
+
+const closeContact = document.getElementById("closeContact");
+
+// Open popup
+
+contactBtn.addEventListener("click", function() {
+
+    contactPopup.style.display = "flex";
+
+});
+
+// Close popup
+
+closeContact.addEventListener("click", function() {
+
+    contactPopup.style.display = "none";
+
+});
+
+// Close when clicking outside popup
+
+contactPopup.addEventListener("click", function(event) {
+
+    if (event.target === contactPopup) {
+
+        contactPopup.style.display = "none";
+
+    }
+
+});
+
+// Close using Escape key
+
+document.addEventListener("keydown", function(event) {
+
+    if (event.key === "Escape") {
+
+        contactPopup.style.display = "none";
+
+    }
+
+});
+
+</script>
 </body>
 </html>
 
